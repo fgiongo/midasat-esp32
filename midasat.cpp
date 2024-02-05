@@ -24,7 +24,7 @@ int altitude[2];
 int sea_level_pressure;
 int velocidade[2];
 int aceleracao;
-bool is_done = false;
+bool is_done;
 
 void setup () {
     Serial.begin(115200);
@@ -59,6 +59,8 @@ void setup () {
     velocidade[0] = 0;
     velocidade[1] = 0;
     aceleracao = 0;
+
+    is_done = false;
 }
 
 void loop () {
