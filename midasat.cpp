@@ -51,7 +51,7 @@ void setup () {
     // Inicializando altimetro
     if (!bmp.performReading()) {
         Serial.println("Failed to perform reading :(");
-        return;
+        while (1);
     }
     sea_level_pressure = bmp.pressure / 100;
     altitude[0] = bmp.readAltitude(sea_level_pressure);
@@ -64,6 +64,9 @@ void setup () {
 }
 
 void loop () {
+    if (!bmp.performReading()) {
+        return;
+    }
     altitude[0] = altitude[1];
     altitude[1] = bmp.readAltitude(sea_level_pressure);
     
