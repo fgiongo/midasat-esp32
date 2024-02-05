@@ -91,4 +91,6 @@ void loop () {
         // Abrir valvula do inibidor
         digitalWrite(VAL_INIBIDOR, HIGH);
     }
+
+    delay(100);
 }
