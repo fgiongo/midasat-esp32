@@ -10,8 +10,10 @@
 #define BMP_CS 10
 
 // Definindo portas de saida do sinal para valvulas
-#define VAL_REAGENTE 0;
-#define VAL_INIBIDOR 1;
+#define VAL_REAGENTE 1
+#define VAL_INIBIDOR 1
+
+#define TEMPO_DE_REACAO 10000
 
 // Precisa testar pra ver se o ESP32 tem hardware SPI, eu desconfio que sim
 //Adafruit_BMP3XX bmp; // I2C
