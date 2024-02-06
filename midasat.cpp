@@ -10,8 +10,9 @@
 #define BMP_CS 10
 
 // Definindo portas de saida do sinal para valvulas
-#define VAL_REAGENTE 0
-#define VAL_INIBIDOR 1
+#define VAL_PRECURSOR 0
+#define VAL_REAGENTE 1
+#define VAL_INIBIDOR 2
 
 #define TEMPO_DE_REACAO 10000
 
@@ -45,6 +46,7 @@ void setup () {
     bmp.setOutputDataRate(BMP3_ODR_50_HZ);
 
     // Inicializando saidas PWM
+    pinMode(VAL_PRECURSOR, OUTPUT);
     pinMode(VAL_REAGENTE, OUTPUT);
     pinMode(VAL_INIBIDOR, OUTPUT);
 
@@ -69,7 +71,7 @@ void loop () {
     }
     altitude[0] = altitude[1];
     altitude[1] = bmp.readAltitude(sea_level_pressure);
-    
+
     velocidade[0] = velocidade[1];
     velocidade[1] = altitude[1] - altitude[0];
 
@@ -84,10 +86,16 @@ void loop () {
     // Estado de microgravidade
     if (aceleracao <= 0) {
         is_done = true;
+
+        // Abrir valvula do precursor
+        digitalWrite(VAL_PRECURSOR, HIGH);
+
         // Abrir valvula do reagente
         digitalWrite(VAL_REAGENTE, HIGH);
+
         // Esperar tempo de reacao
         delay(TEMPO_DE_REACAO);
+
         // Abrir valvula do inibidor
         digitalWrite(VAL_INIBIDOR, HIGH);
     }
